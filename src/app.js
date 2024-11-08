@@ -4,7 +4,10 @@ const express = require('express');
 
 const app = express();
 //app.get => this will only handle get call to user
-app.get("/user" ,(req, res) =>{
+app.get("/user/:userId" ,(req, res) =>{ // "?" means optional "+" means u can add same letter as much time in b/w it will 
+    //work "*" means u can add anything in between
+    console.log(req.query)
+    console.log(req.params)
     res.send({firstName : "Akshay" , lastName: "Saini"})
 });
 
