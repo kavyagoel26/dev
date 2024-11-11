@@ -3,26 +3,34 @@
 const express = require('express');
 
 const app = express();
-//app.get => this will only handle get call to user
-app.get("/user/:userId" ,(req, res) =>{ // "?" means optional "+" means u can add same letter as much time in b/w it will 
-    //work "*" means u can add anything in between
-    console.log(req.query)
-    console.log(req.params)
-    res.send({firstName : "Akshay" , lastName: "Saini"})
-});
 
-app.post("/user" , (req,res) =>{
-    //saving data in db
-    res.send("data successfully saved to the database")
-})
-
-app.delete("/user" , (req, res) =>{
-    res.send("deleted successfully")
-})
 //app.use => this will match all the http method API calls to /hello
-app.use("/hello",(req, res) =>{
-    res.send("hello from the server !!!")
-});
+app.get("/hello",(req, res,next) =>{
+    console.log("route1")
+ 
+    // res.send("hello from the server !!!")   
+    next();
+},
+(req,res,next) =>{
+    console.log("route2")
+  
+    // res.send("hello2")
+    next()
+},
+(req,res,next) =>{
+    console.log("route3")
+    
+    // res.send("hello3");
+    next();
+
+},
+(req,res,next) =>{
+    console.log("route4")
+    res.send("hello4")
+   
+},
+
+);
 
 app.listen(3000 , () =>{
     console.log("successfully running")
